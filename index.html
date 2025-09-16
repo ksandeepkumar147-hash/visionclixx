@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Clixx - Photography & Videography</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+            z-index: 1;
+        }
+
+        .video-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-fade {
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .video-fade.active {
+            opacity: 1;
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hover-grow {
+            transition: all 0.3s ease;
+        }
+
+        .hover-grow:hover {
+            transform: scale(1.02);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .masonry {
+            columns: 3;
+            column-gap: 1rem;
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+        }
+
+        /* Enhanced Responsive Design */
+        @media (max-width: 1536px) {
+            .text-8xl {
+                font-size: 6rem;
+            }
+        }
+
+        @media (max-width: 1280px) {
+            .text-8xl {
+                font-size: 5rem;
+            }
+
+            .text-6xl {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .text-8xl {
+                font-size: 4rem;
+            }
+
+            .text-6xl {
+                font-size: 3rem;
+            }
+
+            .text-5xl {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .masonry {
+                columns: 2;
+            }
+
+            .text-8xl {
+                font-size: 3rem;
+            }
+
+            .text-6xl {
+                font-size: 2.5rem;
+            }
+
+            .text-5xl {
+                font-size: 2rem;
+            }
+
+            .text-4xl {
+                font-size: 1.8rem;
+            }
+
+            .text-3xl {
+                font-size: 1.5rem;
+            }
+
+            .text-2xl {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .masonry {
+                columns: 1;
+            }
+
+            .text-8xl {
+                font-size: 2.5rem;
+            }
+
+            .text-6xl {
+                font-size: 2rem;
+            }
+
+            .text-5xl {
+                font-size: 1.8rem;
+            }
+
+            .text-4xl {
+                font-size: 1.6rem;
+            }
+
+            .text-3xl {
+                font-size: 1.4rem;
+            }
+
+            .text-2xl {
+                font-size: 1.2rem;
+            }
+
+            .text-xl {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .text-8xl {
+                font-size: 2rem;
+            }
+
+            .text-6xl {
+                font-size: 1.8rem;
+            }
+
+            .text-5xl {
+                font-size: 1.6rem;
+            }
+
+            .text-4xl {
+                font-size: 1.4rem;
+            }
+
+            .text-3xl {
+                font-size: 1.3rem;
+            }
+
+            .text-2xl {
+                font-size: 1.1rem;
+            }
+
+            .text-xl {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .text-8xl {
+                font-size: 1.8rem;
+            }
+
+            .text-6xl {
+                font-size: 1.6rem;
+            }
+
+            .text-5xl {
+                font-size: 1.4rem;
+            }
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Colorful Portfolio Animations */
+        .floating-shapes {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(1px);
+        }
+
+        .shape-1 {
+            width: 120px;
+            height: 120px;
+            top: 10%;
+            left: 10%;
+            animation: float1 8s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 180px;
+            height: 180px;
+            top: 50%;
+            right: 15%;
+            animation: float2 10s ease-in-out infinite;
+        }
+
+        .shape-3 {
+            width: 100px;
+            height: 100px;
+            bottom: 30%;
+            left: 70%;
+            animation: float3 9s ease-in-out infinite;
+        }
+
+        .shape-4 {
+            width: 140px;
+            height: 140px;
+            top: 70%;
+            left: 20%;
+            animation: float4 7s ease-in-out infinite;
+        }
+
+        .shape-5 {
+            width: 90px;
+            height: 90px;
+            top: 20%;
+            right: 40%;
+            animation: float5 11s ease-in-out infinite;
+        }
+
+        /* Particle System */
+        .particles {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .particle-1 {
+            top: 20%;
+            left: 30%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        .particle-2 {
+            top: 40%;
+            right: 25%;
+            animation: twinkle 4s ease-in-out infinite 0.5s;
+        }
+
+        .particle-3 {
+            bottom: 30%;
+            left: 15%;
+            animation: twinkle 3.5s ease-in-out infinite 1s;
+        }
+
+        .particle-4 {
+            top: 60%;
+            left: 80%;
+            animation: twinkle 2.8s ease-in-out infinite 1.5s;
+        }
+
+        .particle-5 {
+            bottom: 50%;
+            right: 60%;
+            animation: twinkle 4.2s ease-in-out infinite 2s;
+        }
+
+        .particle-6 {
+            top: 80%;
+            left: 50%;
+            animation: twinkle 3.8s ease-in-out infinite 2.5s;
+        }
+
+        @keyframes float1 {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: translateY(-30px) rotate(180deg) scale(1.1);
+            }
+        }
+
+        @keyframes float2 {
+
+            0%,
+            100% {
+                transform: translateX(0px) rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: translateX(-40px) rotate(-180deg) scale(0.9);
+            }
+        }
+
+        @keyframes float3 {
+
+            0%,
+            100% {
+                transform: translate(0px, 0px) rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: translate(25px, -20px) rotate(180deg) scale(1.2);
+            }
+        }
+
+        @keyframes float4 {
+
+            0%,
+            100% {
+                transform: translate(0px, 0px) rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: translate(-20px, 30px) rotate(270deg) scale(0.8);
+            }
+        }
+
+        @keyframes float5 {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: translateY(25px) rotate(-90deg) scale(1.3);
+            }
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        .filter-btn {
+            color: #6b7280;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #1f2937, #374151, #111827);
+            color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .filter-btn:hover {
+            color: #1f2937;
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .portfolio-item {
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 1rem;
+        }
+
+        .portfolio-item:hover::before {
+            opacity: 1;
+        }
+
+        .portfolio-item.hidden {
+            opacity: 0;
+            transform: scale(0.8) rotate(5deg);
+            pointer-events: none;
+        }
+
+        .portfolio-item.visible {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.02) translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 30px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 backdrop-blur-sm bg-black/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="logo.jpg" alt="Vision Clixx Logo" class="w-10 h-10 mr-3 rounded-full">
+                    <div class="text-2xl font-bold playfair">Vision Clixx</div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-sm font-medium hover:text-gray-300 transition">HOME</a>
+                    <a href="#about" class="text-sm font-medium hover:text-gray-300 transition">ABOUT</a>
+                    <a href="#portfolio" class="text-sm font-medium hover:text-gray-300 transition">PORTFOLIO</a>
+                    <a href="#services" class="text-sm font-medium hover:text-gray-300 transition">SERVICES</a>
+                    <a href="#blog" class="text-sm font-medium hover:text-gray-300 transition">BLOG</a>
+                    <a href="#contact" class="text-sm font-medium hover:text-gray-300 transition">CONTACT</a>
+                </div>
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative video-container">
+        <!-- Background Videos -->
+        <!-- Add your own videos here - replace with your video files -->
+        <video class="hero-video video-fade active" autoplay muted loop playsinline>
+            <source src="video1.mp4" type="video/mp4">
+        </video>
+        <video class="hero-video video-fade" autoplay muted loop playsinline>
+            <source src="video2.mp4" type="video/mp4">
+        </video>
+        <video class="hero-video video-fade" autoplay muted loop playsinline>
+            <source src="video3.mp4" type="video/mp4">
+        </video>
+
+        <!-- Overlay -->
+        <div class="hero-overlay"></div>
+
+        <!-- Content -->
+        <div class="text-center px-4 sm:px-6 lg:px-8 relative z-10">
+            <h1
+                class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light playfair mb-4 sm:mb-6 text-shadow fade-in leading-tight">
+                Vision Clixx
+            </h1>
+            <p class="text-sm sm:text-base md:text-lg lg:text-xl font-light tracking-widest mb-6 sm:mb-8 fade-in"
+                style="animation-delay: 0.3s">
+                PHOTOGRAPHY & VIDEOGRAPHY
+            </p>
+            <div class="w-16 sm:w-20 md:w-24 h-px bg-white mx-auto mb-6 sm:mb-8 fade-in" style="animation-delay: 0.6s">
+            </div>
+            <p class="text-xs sm:text-sm md:text-base max-w-xs sm:max-w-lg md:max-w-2xl mx-auto leading-relaxed fade-in px-2"
+                style="animation-delay: 0.9s">
+                Capturing life's most precious moments with artistic vision and technical excellence.
+                Every frame tells a story, every moment becomes eternal.
+            </p>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white text-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-20 fade-in">
+                <h2 class="text-5xl md:text-6xl playfair mb-6 text-gray-900">About Vision Clixx</h2>
+                <div class="w-24 h-px bg-gray-900 mx-auto mb-8"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Where artistry meets technology, and every frame tells a story worth remembering forever.
+                </p>
+            </div>
+
+            <!-- Main Content -->
+            <div class="grid lg:grid-cols-2 gap-20 items-center mb-20">
+                <div class="fade-in">
+                    <div class="relative">
+                        <img src="photo1.png" alt="Vision Clixx Studio"
+                            class="w-full h-96 object-cover rounded-2xl shadow-2xl">
+                        <div
+                            class="absolute -bottom-6 -right-6 w-32 h-32 bg-gray-900 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-camera text-white text-3xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in">
+                    <h3 class="text-3xl playfair mb-6 text-gray-900">Our Story</h3>
+                    <p class="text-gray-700 leading-relaxed mb-6 text-lg">
+                        Founded with a passion for capturing life's most precious moments, Vision Clixx has evolved into
+                        Jodhpur's premier photography and videography studio. We believe that every wedding, every
+                        portrait, and every celebration deserves to be documented with the highest level of artistry and
+                        technical excellence.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-8 text-lg">
+                        Our team of creative professionals combines 15 years of experience with cutting-edge technology
+                        to deliver imagery that not only captures moments but preserves emotions, creating timeless
+                        memories that will be cherished for generations.
+                    </p>
+
+                    <!-- Features -->
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-award text-gray-900"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Award Winning</h4>
+                                <p class="text-gray-600 text-sm">Recognized Excellence</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-users text-gray-900"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Expert Team</h4>
+                                <p class="text-gray-600 text-sm">Professional Crew</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="bg-gray-50 rounded-3xl p-12 mb-20 fade-in">
+                <div class="grid md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <h3 class="text-4xl font-bold text-gray-900 mb-2">500+</h3>
+                        <p class="text-gray-600 font-medium">Happy Clients</p>
+                        <p class="text-gray-500 text-sm mt-1">Satisfied customers worldwide</p>
+                    </div>
+                    <div>
+                        <h3 class="text-4xl font-bold text-gray-900 mb-2">1000+</h3>
+                        <p class="text-gray-600 font-medium">Projects Completed</p>
+                        <p class="text-gray-500 text-sm mt-1">Successful deliveries</p>
+                    </div>
+                    <div>
+                        <h3 class="text-4xl font-bold text-gray-900 mb-2">15+</h3>
+                        <p class="text-gray-600 font-medium">Years Experience</p>
+                        <p class="text-gray-500 text-sm mt-1">Industry expertise</p>
+                    </div>
+                    <div>
+                        <h3 class="text-4xl font-bold text-gray-900 mb-2">24/7</h3>
+                        <p class="text-gray-600 font-medium">Support</p>
+                        <p class="text-gray-500 text-sm mt-1">Always available</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Mission Statement -->
+            <div class="text-center mt-20 fade-in">
+                <div class="bg-gray-900 text-white rounded-3xl p-12">
+                    <h3 class="text-3xl playfair mb-6">Our Mission</h3>
+                    <p class="text-xl leading-relaxed max-w-4xl mx-auto text-gray-300">
+                        "To transform fleeting moments into eternal memories through the art of photography and
+                        videography, ensuring that every emotion, every smile, and every tear of joy is preserved with
+                        the utmost care and creativity."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio"
+        class="py-20 bg-gradient-to-br from-white via-gray-100 to-gray-200 relative overflow-hidden">
+        <!-- Elegant Animated Background -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="floating-shapes">
+                <div class="shape shape-1 bg-gradient-to-r from-gray-800 to-black"></div>
+                <div class="shape shape-2 bg-gradient-to-r from-gray-600 to-gray-800"></div>
+                <div class="shape shape-3 bg-gradient-to-r from-black to-gray-700"></div>
+                <div class="shape shape-4 bg-gradient-to-r from-gray-700 to-gray-900"></div>
+                <div class="shape shape-5 bg-gradient-to-r from-gray-900 to-black"></div>
+            </div>
+        </div>
+
+        <!-- Animated Particles -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="particles">
+                <div class="particle particle-1 bg-gray-800"></div>
+                <div class="particle particle-2 bg-black"></div>
+                <div class="particle particle-3 bg-gray-700"></div>
+                <div class="particle particle-4 bg-gray-900"></div>
+                <div class="particle particle-5 bg-gray-600"></div>
+                <div class="particle particle-6 bg-black"></div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12 sm:mb-16 fade-in px-4">
+                <h2
+                    class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl playfair mb-4 sm:mb-6 text-gray-900 animate-pulse">
+                    Our Portfolio</h2>
+                <div
+                    class="w-16 sm:w-20 md:w-24 h-px bg-gradient-to-r from-gray-800 via-black to-gray-700 mx-auto mb-6 sm:mb-8 animate-pulse">
+                </div>
+                <p
+                    class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto leading-relaxed">
+                    Discover our creative journey through stunning visuals that capture life's most precious moments</p>
+            </div>
+
+            <!-- Elegant Advanced Filter -->
+            <div class="flex justify-center mb-16 fade-in px-4">
+                <div
+                    class="bg-white/80 backdrop-blur-lg rounded-full p-2 flex flex-wrap justify-center gap-2 sm:space-x-2 sm:flex-nowrap border border-gray-300 shadow-lg max-w-full">
+                    <button onclick="filterPortfolio('all')"
+                        class="filter-btn active px-3 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-medium transition hover:scale-105 whitespace-nowrap">ALL</button>
+                    <button onclick="filterPortfolio('wedding')"
+                        class="filter-btn px-3 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-medium transition hover:scale-105 whitespace-nowrap">WEDDINGS</button>
+                    <button onclick="filterPortfolio('prewedding')"
+                        class="filter-btn px-3 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-medium transition hover:scale-105 whitespace-nowrap">PRE-WEDDING</button>
+                    <button onclick="filterPortfolio('model')"
+                        class="filter-btn px-3 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-medium transition hover:scale-105 whitespace-nowrap">MODEL</button>
+                    <button onclick="filterPortfolio('product')"
+                        class="filter-btn px-3 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-medium transition hover:scale-105 whitespace-nowrap">PRODUCT</button>
+                    <button onclick="filterPortfolio('birthday')"
+                        class="filter-btn px-3 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-medium transition hover:scale-105 whitespace-nowrap">BIRTHDAY</button>
+            
+                </div>
+            </div>
+
+            <!-- Advanced Portfolio Grid -->
+            <div id="portfolioGrid"
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 fade-in">
+                
+                <!-- Priya & Arjun Wedding -->
+                <div class="portfolio-item wedding group relative overflow-hidden rounded-2xl border border-gray-300 shadow-lg bg-white cursor-pointer"
+                    data-category="wedding" onclick="openGallery('priya-arjun')">
+                    <img src="photo2.jpeg" alt="Priya & Arjun Wedding"
+                        class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Priya & Arjun</h3>
+                            <p class="text-gray-200 text-sm">Royal Wedding Collection</p>
+                            <p class="text-gray-300 text-xs mt-1">25 Photos • 3 Videos</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-images text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rahul & Sneha Wedding -->
+                <div class="portfolio-item wedding group relative overflow-hidden rounded-2xl border border-gray-300 shadow-lg bg-white cursor-pointer"
+                    data-category="wedding" onclick="openGallery('rahul-sneha')">
+                    <img src="photo3.jpeg" alt="Rahul & Sneha Wedding"
+                        class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Rahul & Sneha</h3>
+                            <p class="text-gray-200 text-sm">Traditional Wedding</p>
+                            <p class="text-gray-300 text-xs mt-1">30 Photos • 2 Videos</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-images text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Amit & Kavya Wedding -->
+                <div class="portfolio-item wedding group relative overflow-hidden rounded-2xl border border-gray-300 shadow-lg bg-white cursor-pointer"
+                    data-category="wedding" onclick="openGallery('amit-kavya')">
+                    <img src="photo4.jpeg" alt="Amit & Kavya Wedding"
+                        class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Amit & Kavya</h3>
+                            <p class="text-gray-200 text-sm">Destination Wedding</p>
+                            <p class="text-gray-300 text-xs mt-1">40 Photos • 4 Videos</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-images text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pre-Wedding Shoots -->
+                <div class="portfolio-item prewedding group relative overflow-hidden rounded-2xl border border-gray-300 shadow-lg bg-white cursor-pointer"
+                    data-category="prewedding" onclick="openGallery('prewedding-1')">
+                    <img src="photo5.jpeg" alt="Pre-Wedding Shoot"
+                        class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Romantic Pre-Wedding</h3>
+                            <p class="text-gray-200 text-sm">Outdoor Location Shoot</p>
+                            <p class="text-gray-300 text-xs mt-1">15 Photos • 1 Video</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-images text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model Photography -->
+                <div class="portfolio-item model group relative overflow-hidden rounded-2xl border border-gray-300 shadow-lg bg-white cursor-pointer"
+                    data-category="model" onclick="openGallery('model-1')">
+                    <img src="photo6.jpeg" alt="Model Photography"
+                        class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Fashion Model Shoot</h3>
+                            <p class="text-gray-200 text-sm">Studio Photography</p>
+                            <p class="text-gray-300 text-xs mt-1">20 Photos</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-images text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Photography -->
+                <div class="portfolio-item product group relative overflow-hidden rounded-2xl border border-gray-300 shadow-lg bg-white cursor-pointer"
+                    data-category="product" onclick="openGallery('product-1')">
+                    <img src="photo7.jpeg" alt="Product Photography"
+                        class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Commercial Products</h3>
+                            <p class="text-gray-200 text-sm">E-commerce Photography</p>
+                            <p class="text-gray-300 text-xs mt-1">12 Photos</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-images text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Birthday Events -->
+                <div class="portfolio-item birthday group relative overflow-hidden rounded-2xl border border-gray-300 shadow-lg bg-white cursor-pointer"
+                    data-category="birthday" onclick="openGallery('birthday-1')">
+                    <img src="photo1.png" alt="Birthday Event"
+                        class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Birthday Celebration</h3>
+                            <p class="text-gray-200 text-sm">Kids Birthday Party</p>
+                            <p class="text-gray-300 text-xs mt-1">18 Photos • 2 Videos</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-images text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portrait Photos -->
+                <div class="portfolio-item portrait group relative overflow-hidden rounded-2xl border border-gray-300 shadow-lg bg-white"
+                    data-category="portrait">
+                    <img src="photo3.jpeg"
+                        alt="Portrait"
+                        class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Professional Portrait</h3>
+                            <p class="text-gray-200 text-sm">Corporate Headshots</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button
+                                class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-expand text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Event Photos -->
+                <div class="portfolio-item event group relative overflow-hidden rounded-2xl" data-category="event">
+                    <img src="photo4.jpeg"
+                        alt="Event"
+                        class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Corporate Event</h3>
+                            <p class="text-gray-300 text-sm">Annual Conference 2024</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button
+                                class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-expand text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More Portfolio Items -->
+                <div class="portfolio-item wedding group relative overflow-hidden rounded-2xl" data-category="wedding">
+                    <img src="photo5.jpeg"
+                        alt="Fashion"
+                        class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Bridal Fashion</h3>
+                            <p class="text-gray-300 text-sm">Designer Collection</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button
+                                class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-expand text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item portrait group relative overflow-hidden rounded-2xl"
+                    data-category="portrait">
+                    <img src="photo6.jpeg"
+                        alt="Commercial"
+                        class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Business Portrait</h3>
+                            <p class="text-gray-300 text-sm">Executive Photography</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button
+                                class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-expand text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item event group relative overflow-hidden rounded-2xl" data-category="event">
+                    <img src="photo7.jpeg"
+                        alt="Nature"
+                        class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Outdoor Event</h3>
+                            <p class="text-gray-300 text-sm">Garden Party</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button
+                                class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-expand text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Hidden Portfolio Items -->
+                <div class="portfolio-item prewedding group relative overflow-hidden rounded-2xl hidden-item"
+                    data-category="prewedding" style="display: none;">
+                    <img src="photo2.jpeg"
+                        alt="Pre-Wedding"
+                        class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Pre-Wedding Shoot</h3>
+                            <p class="text-gray-300 text-sm">Romantic Couple Session</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button
+                                class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-expand text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item model group relative overflow-hidden rounded-2xl hidden-item"
+                    data-category="model" style="display: none;">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Model Shoot"
+                        class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Fashion Model</h3>
+                            <p class="text-gray-300 text-sm">Professional Model Shoot</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button
+                                class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-expand text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item product group relative overflow-hidden rounded-2xl hidden-item"
+                    data-category="product" style="display: none;">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Product Photography"
+                        class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Product Photography</h3>
+                            <p class="text-gray-300 text-sm">Commercial Product Shoot</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button
+                                class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-expand text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item birthday group relative overflow-hidden rounded-2xl hidden-item"
+                    data-category="birthday" style="display: none;">
+                    <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Birthday Party"
+                        class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Birthday Celebration</h3>
+                            <p class="text-gray-300 text-sm">Special Birthday Party</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button
+                                class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-expand text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item wedding group relative overflow-hidden rounded-2xl hidden-item"
+                    data-category="wedding" style="display: none;">
+                    <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Anniversary"
+                        class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Anniversary Shoot</h3>
+                            <p class="text-gray-300 text-sm">Couple Anniversary</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button
+                                class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-expand text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item model group relative overflow-hidden rounded-2xl hidden-item"
+                    data-category="model" style="display: none;">
+                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Fashion Model"
+                        class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold mb-1">Fashion Photography</h3>
+                            <p class="text-gray-300 text-sm">Studio Fashion Shoot</p>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button
+                                class="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fas fa-expand text-white"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-12 fade-in">
+                <button id="loadMoreBtn" onclick="loadMoreItems()"
+                    class="px-8 py-4 bg-gradient-to-r from-gray-800 to-black text-white font-semibold rounded-full hover:from-black hover:to-gray-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <i class="fas fa-plus mr-2"></i>
+                    LOAD MORE
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 relative overflow-hidden"
+        style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); background-size: cover; background-position: center; background-attachment: fixed;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl playfair mb-4 text-white">Our Services</h2>
+                <p class="text-gray-200 max-w-2xl mx-auto">We offer comprehensive photography and videography services
+                    tailored to your unique needs</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <div
+                    class="text-center fade-in bg-white/10 backdrop-blur-lg p-6 sm:p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition">
+                    <div
+                        class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-full">
+                        <i class="fas fa-camera text-lg sm:text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-white">Wedding Photography</h3>
+                    <p class="text-sm sm:text-base text-gray-200 leading-relaxed">Capturing your special day with
+                        artistic vision and attention to every precious moment</p>
+                </div>
+                <div
+                    class="text-center fade-in bg-white/10 backdrop-blur-lg p-6 sm:p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition">
+                    <div
+                        class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-full">
+                        <i class="fas fa-user text-lg sm:text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-white">Portrait Sessions</h3>
+                    <p class="text-sm sm:text-base text-gray-200 leading-relaxed">Professional portraits that capture
+                        your personality and create lasting memories</p>
+                </div>
+                <div
+                    class="text-center fade-in bg-white/10 backdrop-blur-lg p-6 sm:p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition">
+                    <div
+                        class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-full">
+                        <i class="fas fa-video text-lg sm:text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-white">Videography</h3>
+                    <p class="text-sm sm:text-base text-gray-200 leading-relaxed">Cinematic storytelling through motion,
+                        bringing your moments to life</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl playfair mb-4 text-gray-900">What Our Clients Say</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Real experiences from couples and clients who trusted us with
+                    their precious moments</p>
+            </div>
+
+            <div class="relative">
+                <!-- Scroll Buttons -->
+                <button onclick="scrollReviews('left')"
+                    class="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition">
+                    <i class="fas fa-chevron-left text-gray-600"></i>
+                </button>
+                <button onclick="scrollReviews('right')"
+                    class="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition">
+                    <i class="fas fa-chevron-right text-gray-600"></i>
+                </button>
+
+                <!-- Reviews Container -->
+                <div id="reviewsContainer" class="flex overflow-x-auto scrollbar-hide space-x-6 pb-4"
+                    style="scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none;">
+                    <!-- Review 1 -->
+                    <div class="flex-none w-80 bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
+                        <div class="flex mb-4">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <p class="text-gray-700 mb-6 italic leading-relaxed">"Vision Clixx made our wedding day
+                            absolutely magical! Their attention to detail and creative vision exceeded all our
+                            expectations. Every photo tells our story perfectly."</p>
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                                alt="Client" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Priya & Arjun</h4>
+                                <p class="text-gray-500 text-sm">Wedding Couple</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="flex-none w-80 bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
+                        <div class="flex mb-4">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <p class="text-gray-700 mb-6 italic leading-relaxed">"Professional, creative, and incredibly
+                            talented! The portrait session was comfortable and fun. The final images are absolutely
+                            stunning - beyond what we imagined."</p>
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                                alt="Client" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Rahul Sharma</h4>
+                                <p class="text-gray-500 text-sm">Corporate Executive</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="flex-none w-80 bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
+                        <div class="flex mb-4">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <p class="text-gray-700 mb-6 italic leading-relaxed">"Best videography team in Mumbai! They
+                            captured our event beautifully and delivered the final video ahead of schedule. Highly
+                            recommend for any special occasion."</p>
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                                alt="Client" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Sneha Patel</h4>
+                                <p class="text-gray-500 text-sm">Event Organizer</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 4 -->
+                    <div class="flex-none w-80 bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
+                        <div class="flex mb-4">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <p class="text-gray-700 mb-6 italic leading-relaxed">"Amazing experience from start to finish!
+                            The team was professional, punctual, and incredibly creative. Our family photos turned out
+                            absolutely perfect."</p>
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                                alt="Client" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Amit & Family</h4>
+                                <p class="text-gray-500 text-sm">Family Portrait</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 5 -->
+                    <div class="flex-none w-80 bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
+                        <div class="flex mb-4">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <p class="text-gray-700 mb-6 italic leading-relaxed">"Exceptional quality and service! They
+                            understood our vision perfectly and delivered results that exceeded our expectations. Will
+                            definitely work with them again."</p>
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                                alt="Client" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Vikash Kumar</h4>
+                                <p class="text-gray-500 text-sm">Business Owner</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl playfair mb-4 text-gray-900">Photography Blog</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Tips, insights, and inspiration from our photography experts
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog Post 1 -->
+                <article class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition fade-in">
+                    <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Wedding Photography Tips" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">Wedding</span>
+                            <span class="text-gray-500 text-sm ml-3">Dec 15, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">10 Essential Wedding Photography Tips</h3>
+                        <p class="text-gray-600 text-sm mb-4">Discover the secrets to capturing perfect wedding moments
+                            that couples will treasure forever...</p>
+                        <a href="#" class="text-gray-900 font-medium hover:text-gray-600 transition">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition fade-in">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Portrait Photography" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">Portrait</span>
+                            <span class="text-gray-500 text-sm ml-3">Dec 12, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Mastering Portrait Lighting Techniques</h3>
+                        <p class="text-gray-600 text-sm mb-4">Learn professional lighting setups that will transform
+                            your portrait photography skills...</p>
+                        <a href="#" class="text-gray-900 font-medium hover:text-gray-600 transition">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition fade-in">
+                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Camera Equipment" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Equipment</span>
+                            <span class="text-gray-500 text-sm ml-3">Dec 10, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Best Camera Gear for Beginners</h3>
+                        <p class="text-gray-600 text-sm mb-4">Complete guide to choosing the right photography equipment
+                            when starting your journey...</p>
+                        <a href="#" class="text-gray-900 font-medium hover:text-gray-600 transition">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 4 -->
+                <article class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition fade-in">
+                    <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Pre-Wedding Photography" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded-full">Pre-Wedding</span>
+                            <span class="text-gray-500 text-sm ml-3">Dec 8, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Creative Pre-Wedding Shoot Ideas</h3>
+                        <p class="text-gray-600 text-sm mb-4">Unique and romantic pre-wedding photography concepts that
+                            tell your love story...</p>
+                        <a href="#" class="text-gray-900 font-medium hover:text-gray-600 transition">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 5 -->
+                <article class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition fade-in">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Product Photography" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Commercial</span>
+                            <span class="text-gray-500 text-sm ml-3">Dec 5, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Product Photography Secrets</h3>
+                        <p class="text-gray-600 text-sm mb-4">Professional techniques for creating stunning product
+                            images that sell...</p>
+                        <a href="#" class="text-gray-900 font-medium hover:text-gray-600 transition">Read More →</a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 6 -->
+                <article class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition fade-in">
+                    <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                        alt="Event Photography" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Events</span>
+                            <span class="text-gray-500 text-sm ml-3">Dec 3, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Event Photography Best Practices</h3>
+                        <p class="text-gray-600 text-sm mb-4">How to capture memorable moments at birthdays, parties,
+                            and special celebrations...</p>
+                        <a href="#" class="text-gray-900 font-medium hover:text-gray-600 transition">Read More →</a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- View All Blogs Button -->
+            <div class="text-center mt-12 fade-in">
+                <button
+                    class="px-8 py-4 bg-gray-900 text-white font-semibold rounded-full hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <i class="fas fa-book-open mr-2"></i>
+                    VIEW ALL BLOGS
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative overflow-hidden"
+        style="background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'); background-size: cover; background-position: center; background-attachment: fixed;">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl playfair mb-4">Get In Touch</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto mb-12">Ready to capture your story? Contact Vision Clixx for
+                    professional photography and videography services</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16">
+                <!-- Business Details -->
+                <div class="fade-in">
+                    <h3 class="text-2xl playfair mb-8">Vision Clixx Studio</h3>
+
+                    <div class="space-y-6 mb-8">
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-gray-400 mt-1 mr-4 w-5"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Office Address</h4>
+                                <p class="text-gray-300">Main Pal Road<br>Opp Pal Balaji Temple<br>Jodhpur, Rajasthan
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <i class="fas fa-phone text-gray-400 mt-1 mr-4 w-5"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Phone</h4>
+                                <p class="text-gray-300">+91 6375519889<br>+91 8005520049</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <i class="fas fa-envelope text-gray-400 mt-1 mr-4 w-5"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Email</h4>
+                                <p class="text-gray-300">visionclixx@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <i class="fas fa-clock text-gray-400 mt-1 mr-4 w-5"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Business Hours</h4>
+                                <p class="text-gray-300">Monday - Saturday: 10:00 AM - 8:00 PM<br>Sunday: 11:00 AM -
+                                    6:00 PM</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <i class="fas fa-camera text-gray-400 mt-1 mr-4 w-5"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Services</h4>
+                                <p class="text-gray-300">Wedding Photography & Videography<br>Portrait Sessions, Event
+                                    Coverage<br>Commercial Photography, Product Shoots</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Actions -->
+                <div class="fade-in">
+                    <div class="bg-black p-8 rounded-lg">
+                        <h3 class="text-2xl playfair mb-6 text-center">Connect With Us</h3>
+
+                        <div class="text-center mb-8">
+                            <button onclick="openGmailCompose()"
+                                class="inline-flex items-center px-8 py-4 border border-white hover:bg-white hover:text-black transition font-medium rounded-lg mb-6 w-full justify-center">
+                                <i class="fas fa-envelope mr-3"></i>
+                                SEND EMAIL
+                            </button>
+
+                            <button onclick="openWhatsApp()"
+                                class="inline-flex items-center px-8 py-4 bg-green-500 hover:bg-green-600 transition font-medium rounded-lg w-full justify-center text-white">
+                                <i class="fab fa-whatsapp mr-3"></i>
+                                WHATSAPP CHAT
+                            </button>
+                        </div>
+
+                        <!-- Social Media Icons -->
+                        <div class="text-center">
+                            <h4 class="text-lg mb-4">Follow Our Work</h4>
+                            <div class="flex justify-center space-x-4">
+                                <a onclick="openYouTube()"
+                                    class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition cursor-pointer">
+                                    <i class="fab fa-youtube text-white text-xl"></i>
+                                </a>
+                                <a onclick="openInstagram()"
+                                    class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:from-purple-600 hover:to-pink-600 transition cursor-pointer">
+                                    <i class="fab fa-instagram text-white text-xl"></i>
+                                </a>
+                                <a onclick="openFacebook()"
+                                    class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition cursor-pointer">
+                                    <i class="fab fa-facebook text-white text-xl"></i>
+                                </a>
+                                <a onclick="openPinterest()"
+                                    class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition cursor-pointer">
+                                    <i class="fab fa-pinterest text-white text-xl"></i>
+                                </a>
+                                <a onclick="openLinkedIn()"
+                                    class="w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-800 transition cursor-pointer">
+                                    <i class="fab fa-linkedin text-white text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 p-4 bg-gray-800 rounded-lg">
+                            <h4 class="font-semibold mb-2">Quick Booking</h4>
+                            <p class="text-gray-300 text-sm">For urgent bookings or same-day shoots, call us directly or
+                                send a WhatsApp message. We respond within 30 minutes during business hours.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center mb-4">
+                    <img src="logo.jpg" alt="Vision Clixx Logo" class="w-12 h-12 mr-3 rounded-full">
+                    <h3 class="text-2xl playfair">Vision Clixx</h3>
+                </div>
+                <p class="text-gray-400 mb-6">Creating timeless memories through the art of photography</p>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#home" class="text-sm hover:text-white transition">HOME</a>
+                    <a href="#about" class="text-sm hover:text-white transition">ABOUT</a>
+                    <a href="#portfolio" class="text-sm hover:text-white transition">PORTFOLIO</a>
+                    <a href="#services" class="text-sm hover:text-white transition">SERVICES</a>
+                    <a href="#contact" class="text-sm hover:text-white transition">CONTACT</a>
+                </div>
+                <p class="text-gray-500 text-sm">&copy; 2024 Vision Clixx. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize animations on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fade in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Video slideshow
+            const videos = document.querySelectorAll('.hero-video');
+            let currentVideo = 0;
+
+            function switchVideo() {
+                videos[currentVideo].classList.remove('active');
+                currentVideo = (currentVideo + 1) % videos.length;
+                videos[currentVideo].classList.add('active');
+            }
+
+            // Switch video every 8 seconds
+            setInterval(switchVideo, 8000);
+
+            // Gmail compose function
+            window.openGmailCompose = function () {
+                const email = 'visionclixx@gmail.com';
+                const subject = 'Photography & Videography Inquiry - Vision Clixx';
+                const body = 'Hi Vision Clixx Team,%0D%0A%0D%0AI am interested in your photography and videography services.%0D%0A%0D%0APlease provide more details about:%0D%0A- Available packages%0D%0A- Pricing%0D%0A- Booking process%0D%0A%0D%0AThank you!';
+
+                const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${body}`;
+                window.open(gmailUrl, '_blank');
+            };
+
+            // Social Media Functions
+            window.openWhatsApp = function () {
+                const message = 'Hi Vision Clixx! I am interested in your photography and videography services. Please share more details.';
+                const whatsappUrl = `https://wa.me/916375519889?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            };
+
+            window.openYouTube = function () {
+                window.open('https://youtube.com/@visionclixx', '_blank');
+            };
+
+            window.openInstagram = function () {
+                window.open('https://instagram.com/visionclixx', '_blank');
+            };
+
+            window.openFacebook = function () {
+                window.open('https://facebook.com/visionclixx', '_blank');
+            };
+
+            window.openPinterest = function () {
+                window.open('https://pinterest.com/visionclixx', '_blank');
+            };
+
+            window.openLinkedIn = function () {
+                window.open('https://linkedin.com/company/visionclixx', '_blank');
+            };
+
+            // Reviews scroll functionality
+            window.scrollReviews = function (direction) {
+                const container = document.getElementById('reviewsContainer');
+                const scrollAmount = 320; // Width of one review card + gap
+
+                if (direction === 'left') {
+                    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                }
+            };
+
+            // Auto-scroll reviews every 5 seconds
+            setInterval(function () {
+                const container = document.getElementById('reviewsContainer');
+                const maxScroll = container.scrollWidth - container.clientWidth;
+
+                if (container.scrollLeft >= maxScroll) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ left: 320, behavior: 'smooth' });
+                }
+            }, 5000);
+
+            // Portfolio Filter Functionality
+            let itemsLoaded = 8;
+
+            window.filterPortfolio = function (category) {
+                const items = document.querySelectorAll('.portfolio-item');
+                const buttons = document.querySelectorAll('.filter-btn');
+
+                // Update active button
+                buttons.forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+
+                // Reset items loaded counter
+                itemsLoaded = 8;
+
+                // Filter and show items
+                let visibleCount = 0;
+                items.forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        if (visibleCount < itemsLoaded) {
+                            item.style.display = 'block';
+                            item.classList.remove('hidden');
+                            item.classList.add('visible');
+                            visibleCount++;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    } else {
+                        item.style.display = 'none';
+                        item.classList.add('hidden');
+                        item.classList.remove('visible');
+                    }
+                });
+
+                // Show/hide load more button
+                const totalFilteredItems = document.querySelectorAll(`[data-category="${category}"], .portfolio-item`).length;
+                const loadMoreBtn = document.getElementById('loadMoreBtn');
+                if (category === 'all') {
+                    loadMoreBtn.style.display = items.length > itemsLoaded ? 'inline-block' : 'none';
+                } else {
+                    const categoryItems = document.querySelectorAll(`[data-category="${category}"]`);
+                    loadMoreBtn.style.display = categoryItems.length > itemsLoaded ? 'inline-block' : 'none';
+                }
+            };
+
+            // Load More Functionality
+            // Gallery popup with separate photo/video sections
+            window.openGallery = function(coupleId) {
+                const galleries = {
+                    'priya-arjun': {
+                        title: 'Priya & Arjun - Royal Wedding',
+                        photos: ['photo2.jpeg', 'photo5.jpeg', 'photo6.jpeg', 'photo7.jpeg', 'photo3.jpeg'],
+                        videos: ['video1.mp4', 'video2.mp4']
+                    },
+                    'rahul-sneha': {
+                        title: 'Rahul & Sneha - Traditional Wedding',
+                        photos: ['photo3.jpeg', 'photo2.jpeg', 'photo4.jpeg', 'photo6.jpeg'],
+                        videos: ['video3.mp4']
+                    },
+                    'amit-kavya': {
+                        title: 'Amit & Kavya - Destination Wedding',
+                        photos: ['photo4.jpeg', 'photo5.jpeg', 'photo6.jpeg', 'photo7.jpeg'],
+                        videos: ['video4.mp4']
+                    },
+                    'prewedding-1': {
+                        title: 'Romantic Pre-Wedding Shoot',
+                        photos: ['photo5.jpeg', 'photo2.jpeg', 'photo3.jpeg'],
+                        videos: ['video1.mp4']
+                    },
+                    'model-1': {
+                        title: 'Fashion Model Photography',
+                        photos: ['photo6.jpeg', 'photo7.jpeg', 'photo5.jpeg', 'photo4.jpeg'],
+                        videos: []
+                    },
+                    'product-1': {
+                        title: 'Commercial Product Photography',
+                        photos: ['photo7.jpeg', 'photo6.jpeg', 'photo5.jpeg'],
+                        videos: []
+                    },
+                    'birthday-1': {
+                        title: 'Birthday Celebration Photography',
+                        photos: ['photo1.png', 'photo2.jpeg', 'photo3.jpeg'],
+                        videos: ['video2.mp4', 'video3.mp4']
+                    }
+                };
+
+                const gallery = galleries[coupleId];
+                if (!gallery) return;
+                
+                let modalContent = `
+                    <div class="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50 p-4" onclick="closeGallery(event)">
+                        <div class="bg-white rounded-2xl w-full max-w-5xl h-[90vh] flex flex-col" onclick="event.stopPropagation()">
+                            <div class="flex-shrink-0 p-6 border-b border-gray-200">
+                                <div class="flex justify-between items-center">
+                                    <h2 class="text-xl font-bold text-gray-900">${gallery.title}</h2>
+                                    <button onclick="closeGallery()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex-1 overflow-y-auto p-6" style="scrollbar-width: thin; scrollbar-color: #9ca3af #f3f4f6;">
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                                        <i class="fas fa-camera mr-2"></i>Photos (${gallery.photos.length})
+                                    </h3>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                `;
+
+                gallery.photos.forEach((photo, index) => {
+                    modalContent += `
+                        <img src="${photo}" alt="Photo ${index + 1}" 
+                             class="w-full h-32 object-cover rounded-lg cursor-pointer hover:opacity-80 transition"
+                             onclick="openPhotoSlider('${coupleId}', ${index})">
+                    `;
+                });
+
+                if (gallery.videos.length > 0) {
+                    modalContent += `
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                                        <i class="fas fa-video mr-2"></i>Videos (${gallery.videos.length})
+                                    </h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    `;
+                    
+                    gallery.videos.forEach((video, index) => {
+                        modalContent += `
+                            <div class="relative cursor-pointer" onclick="openVideoSlider('${coupleId}', ${index})">
+                                <video class="w-full h-40 object-cover rounded-lg">
+                                    <source src="${video}" type="video/mp4">
+                                </video>
+                                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center rounded-lg hover:bg-opacity-50 transition">
+                                    <i class="fas fa-play text-white text-3xl"></i>
+                                </div>
+                            </div>
+                        `;
+                    });
+                } else {
+                    modalContent += `
+                                    </div>
+                                </div>
+                    `;
+                }
+
+                modalContent += `
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                document.body.insertAdjacentHTML('beforeend', modalContent);
+                document.body.style.overflow = 'hidden';
+            };
+
+            // Photo slider function
+            window.openPhotoSlider = function(coupleId, startIndex) {
+                const galleries = {
+                    'priya-arjun': { photos: ['photo2.jpeg', 'photo5.jpeg', 'photo6.jpeg', 'photo7.jpeg', 'photo3.jpeg'] },
+                    'rahul-sneha': { photos: ['photo3.jpeg', 'photo2.jpeg', 'photo4.jpeg', 'photo6.jpeg'] },
+                    'amit-kavya': { photos: ['photo4.jpeg', 'photo5.jpeg', 'photo6.jpeg', 'photo7.jpeg'] },
+                    'prewedding-1': { photos: ['photo5.jpeg', 'photo2.jpeg', 'photo3.jpeg'] },
+                    'model-1': { photos: ['photo6.jpeg', 'photo7.jpeg', 'photo5.jpeg', 'photo4.jpeg'] },
+                    'product-1': { photos: ['photo7.jpeg', 'photo6.jpeg', 'photo5.jpeg'] },
+                    'birthday-1': { photos: ['photo1.png', 'photo2.jpeg', 'photo3.jpeg'] }
+                };
+                
+                const photos = galleries[coupleId].photos;
+                window.currentPhotoIndex = startIndex;
+                window.totalPhotos = photos.length;
+                
+                let sliderContent = `
+                    <div class="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50" onclick="closeSlider(event)">
+                        <button onclick="closeSlider()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 z-10">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <div class="absolute top-4 left-4 text-white z-10">
+                            <p class="text-lg">Photos <span id="photoIndex">${startIndex + 1}</span> / ${photos.length}</p>
+                        </div>
+                        <button onclick="prevPhoto()" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-4xl hover:text-gray-300 z-10">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button onclick="nextPhoto()" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-4xl hover:text-gray-300 z-10">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="w-full h-full flex items-center justify-center p-16">
+                `;
+                
+                photos.forEach((photo, index) => {
+                    sliderContent += `
+                        <img src="${photo}" alt="Photo ${index + 1}" 
+                             class="photo-item max-w-full max-h-full object-contain ${index === startIndex ? 'block' : 'hidden'}" 
+                             data-index="${index}">
+                    `;
+                });
+                
+                sliderContent += `
+                        </div>
+                    </div>
+                `;
+                
+                document.body.insertAdjacentHTML('beforeend', sliderContent);
+            };
+            
+            // Video slider function
+            window.openVideoSlider = function(coupleId, startIndex) {
+                const galleries = {
+                    'priya-arjun': { videos: ['video1.mp4', 'video2.mp4'] },
+                    'rahul-sneha': { videos: ['video3.mp4'] },
+                    'amit-kavya': { videos: ['video4.mp4'] },
+                    'prewedding-1': { videos: ['video1.mp4'] },
+                    'model-1': { videos: [] },
+                    'product-1': { videos: [] },
+                    'birthday-1': { videos: ['video2.mp4', 'video3.mp4'] }
+                };
+                
+                const videos = galleries[coupleId].videos;
+                window.currentVideoIndex = startIndex;
+                window.totalVideos = videos.length;
+                
+                let sliderContent = `
+                    <div class="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50" onclick="closeSlider(event)">
+                        <button onclick="closeSlider()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 z-10">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <div class="absolute top-4 left-4 text-white z-10">
+                            <p class="text-lg">Videos <span id="videoIndex">${startIndex + 1}</span> / ${videos.length}</p>
+                        </div>
+                        <button onclick="prevVideo()" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-4xl hover:text-gray-300 z-10">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button onclick="nextVideo()" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-4xl hover:text-gray-300 z-10">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="w-full h-full flex items-center justify-center p-16">
+                `;
+                
+                videos.forEach((video, index) => {
+                    sliderContent += `
+                        <video controls class="video-item max-w-full max-h-full ${index === startIndex ? 'block' : 'hidden'}" 
+                               data-index="${index}">
+                            <source src="${video}" type="video/mp4">
+                        </video>
+                    `;
+                });
+                
+                sliderContent += `
+                        </div>
+                    </div>
+                `;
+                
+                document.body.insertAdjacentHTML('beforeend', sliderContent);
+            };
+            
+            // Navigation functions
+            window.nextPhoto = function() {
+                const items = document.querySelectorAll('.photo-item');
+                items[window.currentPhotoIndex].classList.add('hidden');
+                items[window.currentPhotoIndex].classList.remove('block');
+                window.currentPhotoIndex = (window.currentPhotoIndex + 1) % window.totalPhotos;
+                items[window.currentPhotoIndex].classList.remove('hidden');
+                items[window.currentPhotoIndex].classList.add('block');
+                document.getElementById('photoIndex').textContent = window.currentPhotoIndex + 1;
+            };
+            
+            window.prevPhoto = function() {
+                const items = document.querySelectorAll('.photo-item');
+                items[window.currentPhotoIndex].classList.add('hidden');
+                items[window.currentPhotoIndex].classList.remove('block');
+                window.currentPhotoIndex = window.currentPhotoIndex === 0 ? window.totalPhotos - 1 : window.currentPhotoIndex - 1;
+                items[window.currentPhotoIndex].classList.remove('hidden');
+                items[window.currentPhotoIndex].classList.add('block');
+                document.getElementById('photoIndex').textContent = window.currentPhotoIndex + 1;
+            };
+            
+            window.nextVideo = function() {
+                const items = document.querySelectorAll('.video-item');
+                items[window.currentVideoIndex].classList.add('hidden');
+                items[window.currentVideoIndex].classList.remove('block');
+                window.currentVideoIndex = (window.currentVideoIndex + 1) % window.totalVideos;
+                items[window.currentVideoIndex].classList.remove('hidden');
+                items[window.currentVideoIndex].classList.add('block');
+                document.getElementById('videoIndex').textContent = window.currentVideoIndex + 1;
+            };
+            
+            window.prevVideo = function() {
+                const items = document.querySelectorAll('.video-item');
+                items[window.currentVideoIndex].classList.add('hidden');
+                items[window.currentVideoIndex].classList.remove('block');
+                window.currentVideoIndex = window.currentVideoIndex === 0 ? window.totalVideos - 1 : window.currentVideoIndex - 1;
+                items[window.currentVideoIndex].classList.remove('hidden');
+                items[window.currentVideoIndex].classList.add('block');
+                document.getElementById('videoIndex').textContent = window.currentVideoIndex + 1;
+            };
+            
+            window.closeSlider = function(event) {
+                if (event && event.target !== event.currentTarget) return;
+                const slider = document.querySelector('.fixed.inset-0.bg-black.bg-opacity-95');
+                if (slider) {
+                    slider.remove();
+                    document.body.style.overflow = 'auto';
+                }
+            };
+
+            window.closeGallery = function(event) {
+                if (event && event.target !== event.currentTarget) return;
+                const modal = document.querySelector('.fixed.inset-0.bg-black.bg-opacity-95');
+                if (modal) {
+                    modal.remove();
+                    document.body.style.overflow = 'auto';
+                }
+            };
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (document.querySelector('.fixed.inset-0.bg-black.bg-opacity-95')) {
+                    if (document.querySelector('.photo-item')) {
+                        if (e.key === 'ArrowRight') nextPhoto();
+                        if (e.key === 'ArrowLeft') prevPhoto();
+                        if (e.key === 'Escape') closeSlider();
+                    } else if (document.querySelector('.video-item')) {
+                        if (e.key === 'ArrowRight') nextVideo();
+                        if (e.key === 'ArrowLeft') prevVideo();
+                        if (e.key === 'Escape') closeSlider();
+                    } else {
+                        if (e.key === 'Escape') closeGallery();
+                    }
+                }
+            });
+
+            // Gallery Navigation Function
+            window.showGallery = function (category) {
+                // Scroll to portfolio section
+                document.getElementById('portfolio').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+
+                // Wait for scroll to complete, then filter
+                setTimeout(() => {
+                    // Reset items loaded counter
+                    itemsLoaded = 8;
+
+                    // Update active filter button
+                    const buttons = document.querySelectorAll('.filter-btn');
+                    buttons.forEach(btn => btn.classList.remove('active'));
+
+                    // Find and activate the corresponding filter button
+                    const targetBtn = Array.from(buttons).find(btn =>
+                        btn.textContent.toLowerCase().includes(category) ||
+                        (category === 'all' && btn.textContent === 'ALL') ||
+                        (category === 'prewedding' && btn.textContent === 'PRE-WEDDING')
+                    );
+                    if (targetBtn) targetBtn.classList.add('active');
+
+                    // Filter items
+                    const items = document.querySelectorAll('.portfolio-item');
+                    let visibleCount = 0;
+                    items.forEach(item => {
+                        if (category === 'all' || item.dataset.category === category) {
+                            if (visibleCount < itemsLoaded) {
+                                item.style.display = 'block';
+                                item.classList.remove('hidden');
+                                item.classList.add('visible');
+                                visibleCount++;
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        } else {
+                            item.style.display = 'none';
+                            item.classList.add('hidden');
+                            item.classList.remove('visible');
+                        }
+                    });
+
+                    // Show/hide load more button
+                    const loadMoreBtn = document.getElementById('loadMoreBtn');
+                    if (category === 'all') {
+                        loadMoreBtn.style.display = items.length > itemsLoaded ? 'inline-block' : 'none';
+                    } else {
+                        const categoryItems = document.querySelectorAll(`[data-category="${category}"]`);
+                        loadMoreBtn.style.display = categoryItems.length > itemsLoaded ? 'inline-block' : 'none';
+                    }
+                }, 800);
+            };
+
+            window.loadMoreItems = function () {
+                const items = document.querySelectorAll('.portfolio-item');
+                const activeFilter = document.querySelector('.filter-btn.active').textContent.toLowerCase().replace('-', '');
+                let visibleCount = 0;
+                let newItemsShown = 0;
+
+                items.forEach(item => {
+                    const category = item.dataset.category;
+                    const shouldShow = activeFilter === 'all' || category === activeFilter ||
+                        (activeFilter === 'prewedding' && category === 'prewedding');
+
+                    if (shouldShow) {
+                        if (item.style.display !== 'none') {
+                            visibleCount++;
+                        } else if (newItemsShown < 8) {
+                            item.style.display = 'block';
+                            item.classList.remove('hidden');
+                            item.classList.add('visible');
+                            newItemsShown++;
+                            visibleCount++;
+                        }
+                    }
+                });
+
+                itemsLoaded += 8;
+
+                // Hide load more button if no more items
+                const totalItems = activeFilter === 'all' ? items.length :
+                    document.querySelectorAll(`[data-category="${activeFilter}"]`).length;
+                if (visibleCount >= totalItems) {
+                    document.getElementById('loadMoreBtn').style.display = 'none';
+                }
+            };
+
+            // Initialize portfolio items - show first 8
+            const allItems = document.querySelectorAll('.portfolio-item');
+            allItems.forEach((item, index) => {
+                if (index < 8) {
+                    item.style.display = 'block';
+                    item.classList.add('visible');
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // About section video fallback
+            const aboutVideo = document.querySelector('#about video');
+            const aboutBgImage = document.getElementById('aboutBgImage');
+            
+            if (aboutVideo) {
+                aboutVideo.addEventListener('error', function() {
+                    aboutVideo.style.display = 'none';
+                    aboutBgImage.style.display = 'block';
+                });
+                
+                aboutVideo.addEventListener('loadstart', function() {
+                    setTimeout(() => {
+                        if (aboutVideo.readyState === 0) {
+                            aboutVideo.style.display = 'none';
+                            aboutBgImage.style.display = 'block';
+                        }
+                    }, 3000);
+                });
+            }
+
+            // Video hover effects
+            document.querySelectorAll('.portfolio-item video').forEach(video => {
+                const item = video.closest('.portfolio-item');
+
+                item.addEventListener('mouseenter', () => {
+                    video.play();
+                });
+
+                item.addEventListener('mouseleave', () => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+            });
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Portfolio image modal
+            document.querySelectorAll('#portfolio img').forEach(img => {
+                img.addEventListener('click', function () {
+                    const modal = document.createElement('div');
+                    modal.className = 'fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50 p-4';
+                    modal.innerHTML = `
+                        <div class="relative max-w-5xl max-h-full">
+                            <img src="${this.src}" class="max-w-full max-h-full object-contain">
+                            <button onclick="this.parentElement.parentElement.remove()" 
+                                    class="absolute -top-12 right-0 text-white text-3xl hover:text-gray-300 transition">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                    document.body.appendChild(modal);
+                    document.body.style.overflow = 'hidden';
+
+                    modal.addEventListener('click', function (e) {
+                        if (e.target === modal) {
+                            modal.remove();
+                            document.body.style.overflow = 'auto';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
